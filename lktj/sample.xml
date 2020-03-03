@@ -1,0 +1,103 @@
+<personInfos>
+	<personInfo>
+		<!--基本信息-->
+		<baseInfo>
+			<orgCode><!--*医院编码--></orgCode>
+			<orgName><!--*医院名称--></orgName>
+			<personalOrder><!--个人预约编号--></personalOrder>
+			<groupOrder><!--团体预约编号--></groupOrder>
+			<packageCode><!--体检套餐编码--></packageCode>
+			<packageName><!--体检套餐名称--></packageName>
+			<checkNo><!--*体检编号--></checkNo>
+			<checkDate><!--*体检日期--></checkDate>
+			<name><!--*姓名--></name>
+			<sexCode><!--性别代码--></sexCode>
+			<sexName><!--*性别名称--></sexName>
+			<age><!--*年龄year--></age>
+			<birthDate><!--*出生日期--></birthDate>
+			<idCard><!--身份证--></idCard>
+			<tel><!--联系电话（座机）--></tel>
+			<phone><!--联系电话（手机）--></phone>
+			<hyCode><!--婚姻状况代码--></hyCode>
+			<hyName><!--婚姻状况名称--></hyName>
+			<qq><!--QQ--></qq>
+			<email><!--邮箱--></email>
+
+			<!--*工作单位无时不必填写，有则编码和名称必须填写-->
+			<unitCode><!--工作单位编码--></unitCode>
+			<unitName><!--工作单位名称--></unitName>
+			<!--身高、体重，血压，高血糖、高血脂指标无可以不填，有则必须填写-->
+			<height><!--身高cm--></height>
+			<weight><!--体重kg--></weight>
+			<systolicBlood><!--收缩压mmHg--></systolicBlood>
+			<diastolicBlood><!--舒张压mmHg--></diastolicBlood>
+			<glu><!--空腹血糖mmol/L--></glu>
+			<totalCholesterol><!--总胆固醇mmol/L--></totalCholesterol>
+			<triglycerides><!--甘油三酯mmol/L--></triglycerides>
+			<lowLipoprotein><!--低密度脂蛋白mmol/L--></lowLipoprotein>
+			<highLipoprotein><!--高密度脂蛋白mmol/L--></highLipoprotein>
+			<leftNaked><!--左眼裸视视力--></leftNaked>
+			<leftAdjust><!--左眼矫正视力--></leftAdjust>
+			<rightNaked><!--右眼裸视视力--></rightNaked>
+			<rightAdjust><!--右眼矫正视力--></rightAdjust>
+			<workHabits><!--生活习惯（工作运动）--></workHabits>
+			<sleepHabits><!--生活习惯（睡眠）--></sleepHabits>
+			<eatHabits><!--生活习惯（饮食）--></eatHabits>
+			<otherHabits><!--生活习惯（其他）--></otherHabits>
+			<nowMalaise><!--目前不适症状--></nowMalaise>
+			<nowDisease><!--目前疾病--></nowDisease>
+			<historyDisease><!--疾病史--></historyDisease>
+			<historySurgery><!--手术史--></historySurgery>
+			<historyAllergy><!--过敏史--></historyAllergy>
+			<editFlag><!--数据修改标志--></editFlag>
+		</baseInfo>
+
+		<!--费用信息-->
+		<costInfo>
+			<quotaStandard><!--*定额费用标准--></quotaStandard>
+			<quotaCost><!--*定额费用实际使用--></quotaCost>
+			<payCost><!--*自付费用--></payCost>
+			<totalCost><!--*体检总费用--></totalCost>
+		</costInfo>
+
+		<!--总检信息(多个体检总结多个lastInfo即可)-->
+		<lastInfos>
+			<lastInfo>
+				<lastDescr><!--总检描述--></lastDescr>
+				<lastResult><!--总检结果--></lastResult>
+				<lastAdvice><!--总检建议--></lastAdvice>
+				<lastDoctor><!--总检医生--></lastDoctor>
+				<lastDate><!--总检日期--></lastDate>
+			</lastInfo>
+		</lastInfos>
+
+		<!--体检项目信息 （多条体检项目多个item即可，包含一般体格检查、功能检查、化验检查、肿瘤三项等）-->
+		<medicalItems>
+			<item>
+				<itemCode><!--项目编码--></itemCode>
+				<itemName><!--项目名称--></itemName>
+				<itemType><!--检查项目类型--></itemType>
+				<itemDate><!--检查日期--></itemDate>
+				<itemNo><!--项目顺序编号--></itemNo>
+				<itemDescr><!--项目检查描述--></itemDescr>
+				<itemResult><!--项目检查结果或小结--></itemResult>
+				<itemAdvice><!--体检建议--></itemAdvice>
+				<itemDoctor><!--检查医生--></itemDoctor>
+
+				<!--体检指标信息 （多条指标多个unit即可）-->
+				<medicalUnits>
+					<unit>
+						<unitCode><!--指标编码--></unitCode>
+						<unitName><!--指标名称--></unitName>
+						<unitDate><!--检查日期--></unitDate>
+						<unitNo><!--指标顺序编号--></unitNo>
+						<unitResult><!--检查结果--></unitResult>
+						<unitParam><!--指标单位--></unitParam>
+						<unitRefer><!--正常范围值--></unitRefer>
+						<unitTip><!--提示--></unitTip>
+					</unit>
+				</medicalUnits>
+			</item>
+		</medicalItems>
+	</personInfo>
+</personInfos>

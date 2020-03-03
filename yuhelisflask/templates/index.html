@@ -1,0 +1,477 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block styles %}
+
+
+    {{ super() }}
+    {#
+<link href="/static/css/bootstrap.min.css" ref="stylesheet">#}
+    <link href="/static/css/bootstrap-datetimepicker.min.css" ref="stylesheet">
+    <link href="/static/css/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/static/css/Lobibox.min.css" rel="stylesheet">
+
+
+{% endblock %}
+
+
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0);">蓝滴传输</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:void(0);">查询</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a data-toggle="modal" data-target="#frmAbout" href="javascript:void(0);">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">查询条件</h4>
+            </div>
+            <div class="panel-body">
+
+                <form class="form-inline" role="form" id="inputQueryForm" name="query">
+                    <div class="input-group col-lg-4 ">
+                        <span class="input-group-addon">条码号</span>
+                        <input type="number" class="form-control" id="inputBarcode" name="barcode" min="10000"
+                               maxlength="20"
+                               placeholder="输入条码号">
+                    </div>
+                    <div class="input-group col-lg-4">
+                        <span class="input-group-addon">预约号</span>
+                        <input type="number" class="form-control" id="inputOrderid" name="orderid" min="10000"
+                               maxlength="20"
+                               placeholder="输入预约号">
+                    </div>
+
+                    <div class="input-group  col-lg-3">
+                           <span class="input-group-addon">
+						     <input type="checkbox" id="inputOnlyErr" name="onlyErr" checked>
+					       </span>
+                        <input type="text" class="form-control" placeholder="仅查询错误数据" disabled>
+                    </div>
+                    <br><br>
+
+
+                    <div class="input-group date form_date col-lg-4" id="inputBegindate" data-date=""
+                         data-date-format="yyyy-mm-dd">
+                        <span class="input-group-addon">起始日期</span>
+                        <input class="form-control" id="beginText" name="beginText" type="text" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                    <div class="input-group date form_date col-lg-4" id="inputEnddate" data-date=""
+                         data-date-format="yyyy-mm-dd">
+                        <span class="input-group-addon">截止日期</span>
+                        <input class="form-control" id="endText" name="endText" type="text" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+
+                    <div class="input-group  col-lg-3">
+                        <input type="button" class="form-control btn-primary" id="inputQuery" value="查询">
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover" id="tb_query"></table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="frmAbout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        关于【蓝滴传输】
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                版本号
+                            </td>
+                            <td id='table_version' class='text-primary'>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                产品名称
+                            </td>
+                            <td id='table_productname' class='text-primary'>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                作者
+                            </td>
+                            <td id='table_author' class='text-primary'>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                公司
+                            </td>
+                            <td id='table_corp' class='text-primary'>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+    {{ super() }}
+
+    <script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <script src="/static/js/bootstrap-table.min.js"></script>
+    <script src="/static/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/static/js/lobibox.min.js"></script>
+
+    <script>
+
+        /**
+         * 日期格式化（原型扩展或重载）
+         * 格式 YYYY/yyyy/ 表示年份
+         * MM/M 月份
+         * dd/DD/d/D 日期
+         * @param {formatStr} 格式模版
+         * @type string
+         * @returns 日期字符串
+         */
+        Date.prototype.format = function (formatStr) {
+            var str = formatStr;
+            var Week = ['日', '一', '二', '三', '四', '五', '六'];
+            str = str.replace(/yyyy|YYYY/, this.getFullYear());
+            str = str.replace(/MM/, (this.getMonth() + 1) > 9 ? (this.getMonth() + 1).toString() : '0' + (this.getMonth() + 1));
+            str = str.replace(/dd|DD/, this.getDate() > 9 ? this.getDate().toString() : '0' + this.getDate());
+            return str;
+        }
+
+        // 日期脚本
+
+        $("#inputBegindate").datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: true,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+        }).on('changeDate', function (e) {
+            var BeginTime = $("#beginText").val();
+            $("#inputEnddate").datetimepicker("setStartDate", BeginTime);　　//设置结束时间只能从开始时间选择起
+        });
+
+        $("#inputEnddate").datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: true,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+        // $("#beginText").val(new Date().format("yyyy-MM-dd"));
+        // $("#endText").val(new Date().format("yyyy-MM-dd"));
+
+
+        //初始化查询表格
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#tb_query').bootstrapTable({
+                    // url: '/query',         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                    strictSearch: true,
+                    showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    // {#height: 700,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度#}
+                    uniqueId: "barcodeId",               //每一行的唯一标识，一般为主键列
+                    showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: [
+                        {
+                            field: 'barcode_id',
+                            title: '条码号',
+                            formatter: barcodeFormatter,
+                            events: barcodeOperateEvents
+                        }, {
+                            field: 'order_id',
+                            title: '预约号'
+                        }, {
+                            field: 'username',
+                            title: '姓名'
+                        }, {
+                            field: 'sex_name',
+                            title: '性别'
+                        }, {
+                            field: 'age',
+                            title: '年龄'
+                        }, {
+                            field: 'element_assem_id',
+                            title: '项目组ID'
+                        }, {
+                            field: 'element_assem_name',
+                            title: '项目组名称'
+                        },
+                        {
+                            field: 'is_successfull',
+                            title: '传输',
+                            formatter: function (value, row, index) {
+                                //return value ? '<p class ="text-success">正常</p>' : '<p class="text-danger">错误</p>';
+                                return value ? '<span class="glyphicon glyphicon-ok text-success"></span>' : '<span class="glyphicon glyphicon-remove text-danger"></span>';
+                            },
+                            align: 'center'
+
+                        }, {
+                            field: 'trans_msg',
+                            title: '原因',
+                            width: '%22',
+                            formatter: errMsgFormatter
+                        }, {
+                            field: 'trans_time',
+                            title: '转输时间',
+                            width: '%14',
+                        },
+
+                        {
+                            field: 'operate',
+                            title: '操作',
+                            align: 'center',
+                            events: operateEvents,
+                            formatter: operateFormatter //自定义方法，添加操作按钮
+                        },
+                    ],
+                    rowStyle: function (row, index) {
+                        var classesArr = ['success', 'info'];
+                        var strclass = "";
+                        if (index % 2 === 0) {//偶数行
+                            strclass = classesArr[0];
+                        } else {//奇数行
+                            strclass = classesArr[1];
+                        }
+                        return {classes: strclass};
+                    },//隔行变色
+                });
+
+            };
+
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,
+                    barcodeId: oTable.barcodeId,
+                    orderId: oTable.orderId,
+                    onlyErr: oTable.onlyErr,
+                    beginDate: oTable.beginDate,
+                    endDate: oTable.endDate
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+        function barcodeFormatter(value, row, index) {
+            return '<a  id ="linkBarcode" class="text-primary" href="javascript:void(0);">' + row.barcode_id + '</a>';
+        }
+
+        barcodeOperateEvents = {
+            "click #linkBarcode": function (e, value, row, index) {
+                // console.log(row.barcode_id)
+
+            }
+        }
+
+
+        function errMsgFormatter(value, row, index) {
+            var s = new Array();
+            if (row.is_successfull) {
+                s.push('<p class="text-success">' + row.trans_msg + '</p>');
+            } else {
+                s.push('<div data-toggle="tooltip" onMouseOver="$(this).tooltip(\'show\')" title="' + row.trans_msg + '">');
+                s.push('<p  class="text-danger">');
+                var strLen = 22;
+                if (row.trans_msg.length <= strLen) {
+                    s.push(row.trans_msg);
+                } else {
+                    s.push(row.trans_msg.substring(0, strLen) + '...');
+                }
+                s.push('</p>');
+                s.push('</div>');
+            }
+            return s.join('')
+        }
+
+        function operateFormatter(value, row, index) {//操作按钮
+            return [
+                '<button id="btnTransData" type="button" class="btn btn-success">重新传输<span class="glyphicon glyphicon-refresh"></span></button>'
+            ].join('');
+        }
+
+        operateEvents = {
+            "click #btnTransData": function (e, value, row, index) {
+                // console.log(row.barcode_id)
+                showSuccess('lobibox是一款功能非常强大的jQuery消息通知框和信息提示框插件。这个插件分为两个部分：消息通知框和信息提示框。它能非常好的结合Bootstrap使用。')
+
+            }
+        }
+
+
+        function showErr(msg) {
+            showNotify('error', msg);
+
+        }
+
+        function showSuccess(msg) {
+            showNotify('success', msg)
+        }
+
+        function showNotify(msgType, msg) {
+            Lobibox.notify(
+                //info warning,error,success
+                msgType,
+                {
+                    // normal, mini, large
+                    size: 'mini',
+                    delay: 5000,
+                    msg: msg
+
+                }
+            );
+        }
+
+
+        oTable = undefined;
+
+
+        $(function () {
+
+            $('#frmAbout').on("shown.bs.modal", function () {
+                $.ajax({
+                    url: '/about',
+                    async: true,
+                    type: "GET",
+                    data: {},
+                    timeout: 2000,
+                    success: function (data) {
+                        if (0 == data.errCode) {
+                            $('#table_version').text(data.data.version);
+                            $('#table_productname').text(data.data.name);
+                            $('#table_author').text(data.data.author);
+                            $('#table_corp').text(data.data.corp);
+                        }
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // alert(textStatus);
+                    },
+                    dataType: 'json'
+
+                });
+            });
+
+
+            //初始化table
+            oTable = new TableInit();
+            oTable.Init();
+
+
+            $('#inputQuery').on("click", function () {
+                oTable.barcodeId = $('#inputBarcode').val();
+                oTable.orderId = $('#inputOrderid').val();
+                oTable.onlyErr = $('#inputOnlyErr').prop('checked');
+                oTable.beginDate = $('#beginText').val();
+                oTable.endDate = $('#endText').val();
+
+                var opt = {
+                    url: '/query',
+                    silent: true,
+                    pageNumber: 1
+
+                };
+                $('#tb_query').bootstrapTable('refresh', opt);
+
+            });
+
+
+        });
+
+
+    </script>
+{% endblock %}
+
